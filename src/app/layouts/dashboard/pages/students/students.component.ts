@@ -14,7 +14,9 @@ export class StudentsComponent {
     'firstName',
     'lastName',
     'email',
+    'role',
     'createdAt',
+    'actions',
   ];
 
   students: IStudent[] = [
@@ -23,6 +25,7 @@ export class StudentsComponent {
       firstName: 'Juan',
       lastName: 'Lopez',
       email: 'jLopez@mail.com',
+      role: 'USER',
       createdAt: new Date(),
     },
     {
@@ -30,6 +33,7 @@ export class StudentsComponent {
       firstName: 'Michi',
       lastName: 'Quimichi',
       email: 'mQuimichi@mail.com',
+      role: 'ADMIN',
       createdAt: new Date(),
     },
     {
@@ -37,12 +41,41 @@ export class StudentsComponent {
       firstName: 'Luna',
       lastName: 'Cabañas',
       email: 'lCabañas@mail.com',
+      role: 'USER',
       createdAt: new Date(),
     },
   ];
-
   constructor(private matDialog: MatDialog) {}
-  openDialog(): void {
-    this.matDialog.open(StudentDialogComponent);
+  openDialog(editingStudent?: IStudent): void {
+    this.matDialog
+      .open(StudentDialogComponent, {
+        data: editingStudent,
+      })
+      .afterClosed()
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            if (editingStudent) {
+              this.students = this.students.map((student) =>
+                student.id === editingStudent.id
+                  ? { ...student, ...result }
+                  : student
+              );
+            } else {
+              result.id = this.students.length
+                ? this.students[this.students.length - 1].id + 1
+                : 1;
+              result.createdAt = new Date();
+              this.students = [...this.students, result];
+            }
+          }
+        },
+      });
+  }
+
+  onDeleteUser(id: number): void {
+    if (confirm('Estas seguro de eliminar este usuario?')) {
+      this.students = this.students.filter((u) => u.id != id);
+    }
   }
 }
