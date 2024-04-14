@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StudentsModule } from './pages/students/students.module';
 import { CoursesModule } from './pages/courses/courses.module';
+import { ClassesModule } from './pages/classes/classes.module';
+import { PipesAndDirectivesModule } from './pages/pipes-and-directives/pipes-and-directives.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -20,7 +22,9 @@ import { CoursesModule } from './pages/courses/courses.module';
     MatButtonModule,
     MatIconModule,
     StudentsModule,
-    CoursesModule
+    CoursesModule,
+    ClassesModule,
+    PipesAndDirectivesModule,
   ],
   exports: [DashboardComponent],
 })

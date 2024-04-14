@@ -12,7 +12,7 @@ export class StudentsComponent {
   displayedColumns: string[] = [
     'id',
     'firstName',
-    'lastName',
+  
     'email',
     'role',
     'createdAt',

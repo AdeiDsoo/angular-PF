@@ -6,7 +6,7 @@ import { StudentDialogComponent } from './components/student-dialog/student-dial
 import { SharedModule } from '../../../../shared/shared.module';
 
 @NgModule({
-  declarations: [StudentsComponent, StudentDialogComponent],
+  declarations: [StudentsComponent, StudentDialogComponent, ],
   imports: [
     CommonModule,
     StudentsRoutingModule,

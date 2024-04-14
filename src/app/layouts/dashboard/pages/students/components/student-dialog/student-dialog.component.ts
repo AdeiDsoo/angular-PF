@@ -43,6 +43,18 @@ export class StudentDialogComponent {
     }
   }
 
+  get firstNameControl() {
+    return this.studentForm.get('firstName');
+  }
+
+  get lastNameControl() {
+    return this.studentForm.get('lastName');
+  }
+
+  get emailControl() {
+    return this.studentForm.get('email');
+  }
+
   onSave(): void {
     if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
