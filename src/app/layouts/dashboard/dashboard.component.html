@@ -1,11 +1,11 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer [opened]="!isMobile()" #drawer class="example-sidenav" [mode]="isMobile()?'over':'side'">
-    <p>Auto-resizing sidenav</p>
+    <p>Menu</p>
     @if (showFiller) {
-    <p>Lorem, ipsum dolor sit amet consectetur.</p>
+    <p>Lorem, ipsum dolorr.</p>
     }
     <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
+      click me
     </button>
   </mat-drawer>
 
@@ -19,7 +19,7 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Duck School</span>
+      <span appHeaders >Duck School</span>
     </mat-toolbar>
     <main style="padding: 1rem;">
     <app-students />

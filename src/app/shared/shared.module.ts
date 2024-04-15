@@ -10,9 +10,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
 import { JoinNameAndLastnamePipe } from './pipes/join-name-and-lastname.pipe';
+import { HeadersDirective } from './directives/headers.directive';
 
 @NgModule({
-  declarations: [FormFieldValidationErrorsPipe, JoinNameAndLastnamePipe],
+  declarations: [
+    FormFieldValidationErrorsPipe,
+    JoinNameAndLastnamePipe,
+    HeadersDirective,
+  ],
   imports: [CommonModule],
   exports: [
     MatTableModule,
@@ -25,6 +30,7 @@ import { JoinNameAndLastnamePipe } from './pipes/join-name-and-lastname.pipe';
     MatIconModule,
     FormFieldValidationErrorsPipe,
     JoinNameAndLastnamePipe,
+    HeadersDirective,
   ],
 })
 export class SharedModule {}

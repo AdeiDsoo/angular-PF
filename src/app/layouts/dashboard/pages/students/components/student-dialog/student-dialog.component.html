@@ -3,7 +3,7 @@
   <form [formGroup]="studentForm">
     <div class="row">
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="fill">
+        <mat-form-field class="w-100 p-2" appearance="fill">
           <mat-label>Name</mat-label>
           <input formControlName="firstName" matInput />
           <mat-hint>El nombre debe tener al menos 6 caracteres</mat-hint>
@@ -13,7 +13,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="fill">
+        <mat-form-field class="w-100 p-2" appearance="fill">
           <mat-label>LastName</mat-label>
           <input formControlName="lastName" matInput />
            <mat-error>{{
@@ -22,7 +22,7 @@
         </mat-form-field>
       </div>
       <div class="col-8">
-        <mat-form-field class="w-100" appearance="fill">
+        <mat-form-field class="w-100 p-2" appearance="fill">
           <mat-label>Email</mat-label>
           <input formControlName="email" matInput />
            <mat-error>{{
