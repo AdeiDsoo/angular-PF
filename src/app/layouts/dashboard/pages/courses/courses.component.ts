@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { ICourses } from './models';
 import { API_URL, COURSES, RANDOM_NUMBER } from './courses.module';
+import { AlertsService } from '../../../../core/services/alerts.services';
 
 @Component({
   selector: 'app-courses',
@@ -17,8 +18,12 @@ export class CoursesComponent implements OnInit {
     private coursesService: CoursesService,
     @Inject(API_URL) private apiUrl: string,
     @Inject(RANDOM_NUMBER) private random_Number: number,
-     @Inject(COURSES) public courses: ICourses[]
+     @Inject(COURSES) public courses: ICourses[], public alertService:AlertsService
   ) {
+    this.alertService.notifier$.subscribe({
+      next:(message)=>console.log(message),
+      
+    })
   }
 
   ngOnInit(): void {
