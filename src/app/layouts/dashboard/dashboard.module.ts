@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { StudentsModule } from './pages/students/students.module';
 import { CoursesModule } from './pages/courses/courses.module';
 import { ClassesModule } from './pages/classes/classes.module';
-import { PipesAndDirectivesModule } from './pages/pipes-and-directives/pipes-and-directives.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -24,7 +23,7 @@ import { PipesAndDirectivesModule } from './pages/pipes-and-directives/pipes-and
     StudentsModule,
     CoursesModule,
     ClassesModule,
-    PipesAndDirectivesModule,
+  
   ],
   exports: [DashboardComponent],
 })
