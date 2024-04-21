@@ -27,10 +27,12 @@
       <span appHeaders>Duck School</span>
     </mat-toolbar>
     <main style="padding: 1rem">
+      <button (click)="showComponent=!showComponent">alternar componente</button>
       <!-- <app-students /> -->
-      <app-class09-rxjs />
-      <hr>
-      <app-courses />
+      <!-- <app-class09-rxjs /> -->
+      <app-class10-rxjs *ngIf="showComponent"/>
+      <!-- <hr> -->
+      <!-- <app-courses /> -->
     </main>
     <!-- <button type="button" mat-button (click)="drawer.toggle()">
       Toggle sidenav

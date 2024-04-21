@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   showFiller = false;
-
+showComponent=true
   isMobile():boolean{
     return window.innerWidth<=460
   }

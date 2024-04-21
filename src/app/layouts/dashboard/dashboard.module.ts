@@ -11,6 +11,7 @@ import { StudentsModule } from './pages/students/students.module';
 import { CoursesModule } from './pages/courses/courses.module';
 import { ClassesModule } from './pages/classes/classes.module';
 import { Class09RxjsModule } from './pages/class09-rxjs/class09-rxjs.module';
+import { Class10RxjsModule } from './pages/class10-rxjs/class10-rxjs.module';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -25,6 +26,7 @@ import { Class09RxjsModule } from './pages/class09-rxjs/class09-rxjs.module';
     CoursesModule,
     ClassesModule,
     Class09RxjsModule,
+    Class10RxjsModule,
   ],
   exports: [DashboardComponent],
 })
