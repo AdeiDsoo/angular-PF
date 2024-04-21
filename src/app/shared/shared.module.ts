@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
 import { JoinNameAndLastnamePipe } from './pipes/join-name-and-lastname.pipe';
 import { HeadersDirective } from './directives/headers.directive';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HeadersDirective } from './directives/headers.directive';
     FormFieldValidationErrorsPipe,
     JoinNameAndLastnamePipe,
     HeadersDirective,
+    MatListModule,
   ],
 })
 export class SharedModule {}

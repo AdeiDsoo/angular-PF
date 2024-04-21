@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth.services';
 import { Observable } from 'rxjs';
 import { IStudent } from './pages/students/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent {
   showComponent = true;
   authStudent$: Observable<IStudent | null>;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router:Router) {
     this.authStudent$ = this.authService.authStudent$;
   }
 
@@ -23,6 +24,8 @@ export class DashboardComponent {
 
   logout():void{
   this.authService.logout()
+  //recibe un array y cada elemento del array se va sumando para conformar la url a la que buscars redireccionar
+this.router.navigate(['auth'])
   }
 
   isMobile(): boolean {

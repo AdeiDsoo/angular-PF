@@ -5,13 +5,12 @@
     class="example-sidenav"
     [mode]="isMobile() ? 'over' : 'side'"
   >
-    <p>Menu</p>
-    @if (showFiller) {
-    <p>Lorem, ipsum dolorr.</p>
-    }
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      click me
-    </button>
+    <mat-nav-list>
+      <mat-list-item routerLink="home">Inicio</mat-list-item>
+      <mat-list-item routerLink="students">Estudiantes</mat-list-item>
+      <mat-list-item routerLink="courses">Cursos</mat-list-item>
+      <mat-list-item (click)="logout()" >Cerrar Sesion</mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -30,7 +29,7 @@
         </div>
         <div>
           @if(authStudent$ | async; as student){
-          {{ student?.firstName}}
+          {{ student?.firstName }}
           }
         </div>
       </div>
@@ -41,9 +40,10 @@
       <!-- <button (click)="showComponent=!showComponent">alternar componente</button> -->
       <!-- <app-students /> -->
       <!-- <app-class09-rxjs /> -->
-      <app-class10-rxjs *ngIf="showComponent"/>
+      <!-- <app-class10-rxjs *ngIf="showComponent"/> -->
       <!-- <hr> -->
       <!-- <app-courses /> -->
+      <router-outlet />
     </main>
     <!-- <button type="button" mat-button (click)="drawer.toggle()">
       Toggle sidenav
