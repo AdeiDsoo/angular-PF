@@ -9,6 +9,9 @@ import {
   BehaviorSubject,
   takeUntil,
   Subscription,
+  of,
+  delay,
+  forkJoin,
 } from 'rxjs';
 import { IStudent } from '../students/models';
 
@@ -26,6 +29,57 @@ export class Class10RxjsComponent implements OnInit, OnDestroy {
 
   getUserSuscription?: Subscription;
 
+  students: IStudent[] = [];
+  roles: string[] = [];
+
+  loader = false;
+
+  getRoles(): Observable<string[]> {
+    // this.loader=true
+    return of(['ADMIN', 'STUDENT', 'TEACHER']).pipe(delay(1500));
+    // .subscribe({
+    //   next: (value) => {
+    //     this.roles = value;
+    //   },
+    //   complete: () => {
+    //     this.loader = false;
+    //   },
+    // });
+  }
+
+  getStudents(): Observable<IStudent[]> {
+    const STUDENTS_DB: IStudent[] = [
+      {
+        id: 1,
+        firstName: 'Luna',
+        lastName: 'Lopez',
+        email: 'lLopez@mail.com',
+        role: 'USER',
+        createdAt: new Date(),
+      },
+      {
+        id: 2,
+        firstName: 'Michi',
+        lastName: 'Quimichi',
+        email: 'mQuimichi@mail.com',
+        role: 'ADMIN',
+        createdAt: new Date(),
+      },
+    ];
+    //  this.loader = true;
+    return of(STUDENTS_DB).pipe(delay(3000));
+    //  .subscribe({
+    //     next:(value)=>{
+    //       console.log(value);
+    //       this.students=value
+
+    //     },
+    //     complete:()=>{
+    //       this.loader=false
+    //     }
+    //   })
+  }
+
   login(): void {
     this.changeUser$.next(true);
   }
@@ -34,10 +88,25 @@ export class Class10RxjsComponent implements OnInit, OnDestroy {
     console.log('el componente se destruyo');
 
     this.destroyedComponent$.next(true);
-    this.getUserSuscription?.unsubscribe()
+    this.getUserSuscription?.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.loader=true
+    this.getStudents();
+    this.getRoles();
+
+    forkJoin([this.getRoles(), this.getStudents()]).subscribe({
+      next: (value) => {
+        console.log(value);
+        this.students=value[1]
+        this.roles=value[0]
+      },
+      complete: () => {
+        this.loader = false;
+      },
+    });
+
     this.changeUser$.subscribe({
       next: (value) => {
         // console.log(value);
@@ -53,7 +122,7 @@ export class Class10RxjsComponent implements OnInit, OnDestroy {
       setInterval(() => {
         counter++;
         observer.next(counter);
-        // observer.complete();
+        observer.complete();
       }, 1000);
     });
 

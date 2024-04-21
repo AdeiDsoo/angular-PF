@@ -1,3 +1,12 @@
-<p>class10-rxjs works!</p>
+<!-- <p>class10-rxjs works!</p>
 <button (click)="login()"> Login</button>
-<pre> {{authUser$ | async |json }} </pre>
+<pre> {{authUser$ | async |json }} </pre> -->
+@if (loader) {
+<div>
+    Cargando... por favor espere
+</div>
+}@else {
+<pre> {{students | json}} </pre>
+<pre> {{roles | json}} </pre>
+}
+
