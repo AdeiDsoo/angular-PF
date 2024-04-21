@@ -8,6 +8,7 @@ import {
   Subject,
   BehaviorSubject,
   takeUntil,
+  Subscription,
 } from 'rxjs';
 import { IStudent } from '../students/models';
 
@@ -23,18 +24,20 @@ export class Class10RxjsComponent implements OnInit, OnDestroy {
   authUser$ = new BehaviorSubject<IStudent | null>(null);
   destroyedComponent$ = new Subject<boolean>();
 
+  getUserSuscription?: Subscription;
+
   login(): void {
     this.changeUser$.next(true);
   }
 
   ngOnDestroy(): void {
     console.log('el componente se destruyo');
-    
-    this.destroyedComponent$.next(true)
-  }
-  ngOnInit(): void {
- 
 
+    this.destroyedComponent$.next(true);
+    this.getUserSuscription?.unsubscribe()
+  }
+
+  ngOnInit(): void {
     this.changeUser$.subscribe({
       next: (value) => {
         // console.log(value);
@@ -54,11 +57,13 @@ export class Class10RxjsComponent implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    getUser$.pipe(takeUntil(this.destroyedComponent$)).subscribe({
-      next: (value) => {
-        console.log(value, 'valuenext');
-      },
-    });
+    this.getUserSuscription = getUser$
+      // .pipe(takeUntil(this.destroyedComponent$))
+      .subscribe({
+        next: (value) => {
+          console.log(value, 'valuenext');
+        },
+      });
 
     this.changeUser$.subscribe({
       next: (value) => {

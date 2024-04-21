@@ -16,21 +16,32 @@
 
   <div class="example-sidenav-content">
     <mat-toolbar color="primary">
-      <button
-        (click)="drawer.toggle()"
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span appHeaders>Duck School</span>
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <div>
+          <button
+            (click)="drawer.toggle()"
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with menu icon"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span appHeaders>Duck School</span>
+        </div>
+        <div>
+          @if(authStudent$ | async; as student){
+          {{ student?.firstName}}
+          }
+        </div>
+      </div>
     </mat-toolbar>
     <main style="padding: 1rem">
-      <button (click)="showComponent=!showComponent">alternar componente</button>
+      <button (click)="login()" mat-flat-button color="primary">Log In</button>
+      <button (click)="logout()" mat-flat-button color="warn">LogOut</button>
+      <!-- <button (click)="showComponent=!showComponent">alternar componente</button> -->
       <!-- <app-students /> -->
       <!-- <app-class09-rxjs /> -->
-      <app-class10-rxjs *ngIf="showComponent"/>
+      <!-- <app-class10-rxjs *ngIf="showComponent"/> -->
       <!-- <hr> -->
       <!-- <app-courses /> -->
     </main>
