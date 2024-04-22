@@ -25,6 +25,7 @@ export class DashboardComponent {
   logout():void{
   this.authService.logout()
   //recibe un array y cada elemento del array se va sumando para conformar la url a la que buscars redireccionar
+  //ppor defecto reemplaza toda la url
 this.router.navigate(['auth'])
   }
 

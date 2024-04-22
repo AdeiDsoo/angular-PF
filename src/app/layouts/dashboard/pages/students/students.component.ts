@@ -1,51 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IStudent } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentDialogComponent } from './components/student-dialog/student-dialog.component';
+import { StudentService } from './students.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss',
 })
-export class StudentsComponent {
+export class StudentsComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'firstName',
-  
     'email',
     'role',
     'createdAt',
     'actions',
   ];
 
-  students: IStudent[] = [
-    {
-      id: 1,
-      firstName: 'Juan',
-      lastName: 'Lopez',
-      email: 'jLopez@mail.com',
-      role: 'USER',
-      createdAt: new Date(),
-    },
-    {
-      id: 2,
-      firstName: 'Michi',
-      lastName: 'Quimichi',
-      email: 'mQuimichi@mail.com',
-      role: 'ADMIN',
-      createdAt: new Date(),
-    },
-    {
-      id: 3,
-      firstName: 'Luna',
-      lastName: 'Cabañas',
-      email: 'lCabañas@mail.com',
-      role: 'USER',
-      createdAt: new Date(),
-    },
-  ];
-  constructor(private matDialog: MatDialog) {}
+  loading=false
+  students: IStudent[] = [];
+
+  constructor(
+    private matDialog: MatDialog,
+    private studentService: StudentService
+  ) {}
+  ngOnInit(): void {
+    this.loading=true
+    this.studentService.getStudents().subscribe({
+      next: (value) => {
+        console.log(value);
+        this.students=value
+      },
+      error: (err) => {
+        console.log(err);
+        Swal.fire('Error', 'Ocurrrio un error', 'error')
+      },
+      complete: () => {
+        this.loading=false
+        console.log('complete!!');
+      },
+    });
+  }
+
   openDialog(editingStudent?: IStudent): void {
     this.matDialog
       .open(StudentDialogComponent, {

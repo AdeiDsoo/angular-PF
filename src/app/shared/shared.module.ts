@@ -12,6 +12,7 @@ import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-err
 import { JoinNameAndLastnamePipe } from './pipes/join-name-and-lastname.pipe';
 import { HeadersDirective } from './directives/headers.directive';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
     JoinNameAndLastnamePipe,
     HeadersDirective,
     MatListModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule {}
