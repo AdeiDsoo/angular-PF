@@ -19,6 +19,11 @@ const routes: Routes = [
       import('./pages/courses/courses.module').then((m) => m.CoursesModule),
   },
   {
+    path: 'sales',
+    loadChildren: () =>
+      import('./pages/sales/sales.module').then((m) => m.SalesModule),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',
