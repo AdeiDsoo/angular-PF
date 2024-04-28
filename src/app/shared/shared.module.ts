@@ -13,6 +13,7 @@ import { JoinNameAndLastnamePipe } from './pipes/join-name-and-lastname.pipe';
 import { HeadersDirective } from './directives/headers.directive';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HeadersDirective,
     MatListModule,
     MatProgressSpinnerModule,
+    MatCardModule,
   ],
 })
 export class SharedModule {}

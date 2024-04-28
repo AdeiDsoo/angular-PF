@@ -18,9 +18,9 @@ export class DashboardComponent {
     this.authStudent$ = this.authService.authStudent$;
   }
 
-  login(): void {
-    this.authService.login();
-  }
+  // login(): void {
+  //   this.authService.login();
+  // }
 
   logout():void{
   this.authService.logout()
