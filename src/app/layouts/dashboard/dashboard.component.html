@@ -7,7 +7,7 @@
   >
     <mat-nav-list>
       <mat-list-item routerLink="home">Inicio</mat-list-item>
-      <mat-list-item routerLink="students">Estudiantes</mat-list-item>
+      <mat-list-item *ngIf="(authStudent$|async)?.role=== 'ADMIN'" routerLink="students">Estudiantes</mat-list-item>
       <mat-list-item routerLink="courses">Cursos</mat-list-item>
             <mat-list-item routerLink="classes">Clases</mat-list-item>
       <mat-list-item (click)="logout()" >Cerrar Sesion</mat-list-item>
