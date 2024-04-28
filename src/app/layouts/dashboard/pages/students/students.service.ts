@@ -5,7 +5,7 @@ import { of, Observable, delay, throwError, catchError } from 'rxjs';
 const STUDENTS_DB: IStudent[] = [
   {
     id: 1,
-    firstName: 'Juan',
+    firstName: 'Sandia',
     lastName: 'Lopez',
     email: 'jLopez@mail.com',
     role: 'USER',

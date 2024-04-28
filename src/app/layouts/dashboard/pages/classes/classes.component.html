@@ -1,1 +1,26 @@
-<p>classes works!</p>
+@if(isLoading){<mat-spinner></mat-spinner>} @else {
+<form [formGroup]="classesForm" action="">
+  <mat-form-field>
+    <mat-label>Courses</mat-label>
+    <mat-select formControlName="course">
+      <mat-option [value]="course" *ngFor="let course of courses">
+        {{ course.name }} - {{ course.price | currency }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cantidad</mat-label>
+    <input formControlName="qty" matInput type="number" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Alumnos</mat-label>
+    <mat-select formControlName="students">
+      <mat-option [value]="student" *ngFor="let student of students"> {{student.firstName}} {{student.lastName}} </mat-option>
+    </mat-select>
+  </mat-form-field>
+   <button (click)="createClass()" mat-button>Crear Clase</button>
+</form>
+
+<!-- <pre> {{ classesForm.value | json }} </pre> -->
+<pre>{{ allClass | json }}</pre>
+}

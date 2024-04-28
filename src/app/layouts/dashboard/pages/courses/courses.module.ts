@@ -6,13 +6,14 @@ import { CoursesComponent } from './courses.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CoursesService } from './courses.service';
 import { CoursesMockService } from './courses-mock.service';
+import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
 
 export const API_URL = new InjectionToken('API_URL');
 export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER');
 export const COURSES = new InjectionToken('COURSES');
 
 @NgModule({
-  declarations: [CoursesComponent],
+  declarations: [CoursesComponent, CoursesDialogComponent],
   imports: [CommonModule, CoursesRoutingModule, SharedModule],
   exports: [CoursesComponent],
   providers: [

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoursesComponent } from './courses.component';
+import { CoursesService } from './courses.service';
+import { CoursesMockService } from './courses-mock.service';
 
 const routes: Routes = [
 {

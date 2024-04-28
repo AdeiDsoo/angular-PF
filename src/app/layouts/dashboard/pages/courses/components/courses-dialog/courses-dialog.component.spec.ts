@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Class10RxjsComponent } from './class10-rxjs.component';
+import { CoursesDialogComponent } from './courses-dialog.component';
 
-describe('Class10RxjsComponent', () => {
-  let component: Class10RxjsComponent;
-  let fixture: ComponentFixture<Class10RxjsComponent>;
+describe('CoursesDialogComponent', () => {
+  let component: CoursesDialogComponent;
+  let fixture: ComponentFixture<CoursesDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Class10RxjsComponent]
+      declarations: [CoursesDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Class10RxjsComponent);
+    fixture = TestBed.createComponent(CoursesDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -31,16 +31,13 @@ export class StudentsComponent implements OnInit {
     this.loading=true
     this.studentService.getStudents().subscribe({
       next: (value) => {
-        console.log(value);
         this.students=value
       },
       error: (err) => {
-        console.log(err);
         Swal.fire('Error', 'Ocurrrio un error', 'error')
       },
       complete: () => {
         this.loading=false
-        console.log('complete!!');
       },
     });
   }
