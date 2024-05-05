@@ -59,6 +59,7 @@ export class StudentDialogComponent {
     if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
     } else {
+      
       this.matDialogRef.close(this.studentForm.value);
     }
   }

@@ -8,3 +8,11 @@ export interface IStudent {
   role: UserRole;
   createdAt: Date;
 }
+
+export interface CreateStudentPayload {
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  role: UserRole | null;
+  createdAt: Date | null;
+}

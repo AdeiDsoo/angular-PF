@@ -20,7 +20,7 @@ export class StudentsComponent implements OnInit {
     'actions',
   ];
 
-  loading=false
+  loading = false;
   students: IStudent[] = [];
 
   constructor(
@@ -28,16 +28,16 @@ export class StudentsComponent implements OnInit {
     private studentService: StudentService
   ) {}
   ngOnInit(): void {
-    this.loading=true
+    this.loading = true;
     this.studentService.getStudents().subscribe({
       next: (value) => {
-        this.students=value
+        this.students = value;
       },
       error: (err) => {
-        Swal.fire('Error', 'Ocurrrio un error', 'error')
+        Swal.fire('Error', 'Ocurrrio un error', 'error');
       },
       complete: () => {
-        this.loading=false
+        this.loading = false;
       },
     });
   }
@@ -58,20 +58,35 @@ export class StudentsComponent implements OnInit {
                   : student
               );
             } else {
-              result.id = this.students.length
-                ? this.students[this.students.length - 1].id + 1
-                : 1;
               result.createdAt = new Date();
-              this.students = [...this.students, result];
+              this.studentService.createdStudent(result).subscribe({
+                next: (student) => {
+                  this.students = [...this.students, student];
+                },
+              });
+              // this.students = [...this.students, result];
             }
           }
         },
       });
   }
 
-  onDeleteUser(id: number): void {
+  onDeleteUser(id: string): void {
     if (confirm('Estas seguro de eliminar este usuario?')) {
-      this.students = this.students.filter((u) => u.id != id);
+      this.studentService.deletedStudent(id).subscribe({
+        next: (deletedStudent) => {
+          if (deletedStudent) {
+            this.students = this.students.filter(
+              (student) => student.id.toString() !== id
+            );
+          } else {
+            console.error('No se pudo eliminar el estudiante con ID:', id);
+          }
+        },
+        error: (err) => {
+          console.error('Error al eliminar estudiante:', err);
+        },
+      });
     }
   }
 }

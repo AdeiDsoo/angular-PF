@@ -29,17 +29,5 @@ export class StudentDetailComponent {
           this.loading = false;
         })
       );
-    
-        
-  
-      
   }
-
-
-    // this.activatedRoute.params.subscribe({
-    //   next:(value)=>{
-    //     console.log(value);
-    //   }
-    // })
-  
 }
