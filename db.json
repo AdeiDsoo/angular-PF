@@ -1,0 +1,30 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "firstName": "Sandia",
+      "lastName": "Lopez",
+      "email": "jLopez@mail.com",
+      "role": "USER",
+      "createdAt":"2024-05-05T22:08:49.750Z"
+    },
+    {
+      "id": "2",
+      "firstName": "Michi",
+      "lastName": "Quimichi",
+      "email": "mQuimichi@mail.com",
+      "role": "ADMIN",
+      "createdAt": "2023-12-11T22:08:49.750Z"
+    },
+    {
+      "id": "3",
+      "firstName": "Luna",
+      "lastName": "Cabañas",
+      "email": "lCabañas@mail.com",
+      "role": "USER",
+      "createdAt": "2024-03-02T22:08:49.750Z"
+    }
+  ],
+  "courses": [],
+  "classes": []
+}

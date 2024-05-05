@@ -22,7 +22,7 @@ export class StudentDetailComponent {
 
     this.student$ = this.studentService
       .getStudentById(
-        parseInt(this.activatedRoute.snapshot.params['idStudent'])
+        this.activatedRoute.snapshot.params['idStudent']
       )
       .pipe(
         finalize(() => {
