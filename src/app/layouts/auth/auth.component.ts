@@ -3,6 +3,9 @@ import { AuthService } from '../../core/services/auth.services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { authActions } from '../../store/auth/auth.actions';
+import { authUser } from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-auth',
@@ -13,11 +16,13 @@ export class AuthComponent implements OnDestroy, OnInit {
   authStudentChangeSuscription?: Subscription;
 
   loginForm: FormGroup;
+  authUserSubscription?: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store
   ) {
     this.loginForm = this.formBuilder.group({
       email: [
@@ -33,10 +38,17 @@ export class AuthComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     // this.suscribeToAuthUserChange();
+     this.authUserSubscription =
+     this.store.select(authUser).subscribe({
+      next: (student) => {
+        if (student) this.router.navigate(['dashboard', 'home']);
+      },
+    });
   }
 
   ngOnDestroy(): void {
-    this.authStudentChangeSuscription?.unsubscribe();
+    // this.authStudentChangeSuscription?.unsubscribe();
+    this.authUserSubscription?.unsubscribe
   }
 
   // suscribeToAuthUserChange(): void {
@@ -52,11 +64,13 @@ export class AuthComponent implements OnDestroy, OnInit {
   // }
 
   login() {
-    if(this.loginForm.invalid){
-      this.loginForm.markAllAsTouched()
-    }else{
-    this.authService.login(this.loginForm.getRawValue());
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+    } else {
+      // this.authService.login(this.loginForm.getRawValue());
+      this.store.dispatch(
+        authActions.login({ payload: this.loginForm.getRawValue() })
+      );
     }
-
   }
 }
