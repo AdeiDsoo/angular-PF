@@ -12,7 +12,7 @@ const CLASS_DB: IClass[] = [
       qty: 6,
     },
     students: {
-      id: 2,
+      id: "2",
       firstName: 'Michi',
       lastName: 'Quimichi',
       email: 'mQuimichi@mail.com',

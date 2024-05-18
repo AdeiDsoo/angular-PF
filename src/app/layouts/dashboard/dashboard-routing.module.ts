@@ -25,6 +25,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/classes/classes.module').then((m) => m.ClassesModule),
   },
+ 
   {
     path: '',
     pathMatch: 'full',
