@@ -46,7 +46,7 @@ export class AuthComponent implements OnDestroy, OnInit {
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void { 
     // this.authStudentChangeSuscription?.unsubscribe();
     this.authUserSubscription?.unsubscribe
   }

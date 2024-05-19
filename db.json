@@ -25,6 +25,24 @@
       "createdAt": "2024-03-02T22:08:49.750Z"
     }
   ],
-  "courses": [],
-  "classes": []
+  "courses": [{
+    "id":23,
+    "name":"coursetest",
+    "price":1200,
+    "qty":5
+  }, 
+   {
+      "id": 3,
+      "name": "course mock 1",
+      "price": 9999,
+      "qty": 6
+    }],
+  "classes": [
+  {
+    "id": 5,
+    "courseId": 3,
+    "studentId": "2",
+    "qty": 5
+  }
+]
 }

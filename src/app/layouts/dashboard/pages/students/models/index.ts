@@ -5,7 +5,7 @@ export interface IStudent {
   firstName: string;
   lastName: string;
   email: string;
-  role: UserRole;
+  role: string;
   createdAt: Date;
 }
 

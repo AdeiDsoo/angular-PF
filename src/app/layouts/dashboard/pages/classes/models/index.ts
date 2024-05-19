@@ -4,8 +4,10 @@ import { IStudent } from "../../students/models";
 
 export interface IClass{
     id:number;
-    course: ICourses,
-    students: IStudent, 
+    course?: ICourses,
+    students?: IStudent, 
+    studentId: string,
+    courseId: number,
     qty: number
 }
 

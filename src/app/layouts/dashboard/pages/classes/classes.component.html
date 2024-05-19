@@ -1,4 +1,8 @@
-@if(isLoading){<mat-spinner></mat-spinner>} @else {
+@if(loadingClasses$ | async){<mat-spinner></mat-spinner>} @else { @if(error$
+|async){
+<h2>Ocurrio un error al cargar las clases</h2>
+} @else{
+
 <form [formGroup]="classesForm" action="">
   <mat-form-field>
     <mat-label>Courses</mat-label>
@@ -15,12 +19,14 @@
   <mat-form-field>
     <mat-label>Alumnos</mat-label>
     <mat-select formControlName="students">
-      <mat-option [value]="student" *ngFor="let student of students"> {{student.firstName}} {{student.lastName}} </mat-option>
+      <mat-option [value]="student" *ngFor="let student of students">
+        {{ student.firstName }} {{ student.lastName }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
-   <button (click)="createClass()" mat-button>Crear Clase</button>
+  <button (click)="createClass()" mat-button>Crear Clase</button>
 </form>
 
-<!-- <pre> {{ classesForm.value | json }} </pre> -->
-<pre>{{ allClass | json }}</pre>
-}
+<pre> {{ classesForm.value | json }} </pre>
+<pre>{{ classes$ | async | json }}</pre>
+}}

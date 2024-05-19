@@ -7,6 +7,10 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { CoursesService } from './courses.service';
 import { CoursesMockService } from './courses-mock.service';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from './store/course.effects';
+import { StoreModule } from '@ngrx/store';
+import { courseFeature } from './store/course.reducer';
 
 export const API_URL = new InjectionToken('API_URL');
 export const RANDOM_NUMBER = new InjectionToken('RANDOM_NUMBER');
@@ -14,7 +18,13 @@ export const COURSES = new InjectionToken('COURSES');
 
 @NgModule({
   declarations: [CoursesComponent, CoursesDialogComponent],
-  imports: [CommonModule, CoursesRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    CoursesRoutingModule,
+    SharedModule,
+    StoreModule.forFeature(courseFeature),
+    EffectsModule.forFeature([CourseEffects]),
+  ],
   exports: [CoursesComponent],
   providers: [
     CoursesService,
