@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../../students.service';
 import { Observable, finalize } from 'rxjs';
 import { IStudent } from '../../models';
+import { ClassesServices } from '../../../classes/classes.service';
+import { IClass } from '../../../classes/models';
 
 @Component({
   selector: 'app-student-detail',
@@ -12,18 +14,21 @@ import { IStudent } from '../../models';
 export class StudentDetailComponent {
   student$: Observable<IStudent | undefined>;
   loading = false;
+  classes$: Observable<IClass[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private classesService: ClassesServices
   ) {
-     this.loading = true;
-
+    this.loading = true;
+    // console.log(this.activatedRoute.snapshot.params['idStudent'], 'tipo de id');
+    this.classes$ = this.classesService.getClassesByStudentId(
+      this.activatedRoute.snapshot.params['idStudent']
+    );
     this.student$ = this.studentService
-      .getStudentById(
-        this.activatedRoute.snapshot.params['idStudent']
-      )
+      .getStudentById(this.activatedRoute.snapshot.params['idStudent'])
       .pipe(
         finalize(() => {
           this.loading = false;

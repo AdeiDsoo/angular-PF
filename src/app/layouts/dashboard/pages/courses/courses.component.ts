@@ -60,7 +60,7 @@ export class CoursesComponent implements OnInit {
       });
   }
 
-  onDeleteCourse(id: number): void {
+  onDeleteCourse(id: string): void {
     if (confirm('Estas seguro de eliminar este curso?')) {
       this.courses = this.courses.filter((c) => c.id != id);
     }

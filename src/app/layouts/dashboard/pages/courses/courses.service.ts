@@ -11,13 +11,13 @@ export class CoursesService {
   getCourse():ICourses[]{
     return [
       {
-        id: 1,
+        id: "1",
         name: 'angular',
         price: 700,
         qty: 3,
       },
       {
-        id: 2,
+        id: "2",
         name: 'react',
         price: 800,
         qty: 5,

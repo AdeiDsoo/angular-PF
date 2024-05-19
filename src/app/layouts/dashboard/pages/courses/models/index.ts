@@ -1,5 +1,5 @@
 export interface ICourses{
-    id:number,
+    id:string,
     name:string,
     price:number,
     qty:number

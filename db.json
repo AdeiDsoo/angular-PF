@@ -26,13 +26,13 @@
     }
   ],
   "courses": [{
-    "id":23,
+    "id":"23",
     "name":"coursetest",
     "price":1200,
     "qty":5
   }, 
    {
-      "id": 3,
+      "id": "3",
       "name": "course mock 1",
       "price": 9999,
       "qty": 6
@@ -40,7 +40,7 @@
   "classes": [
   {
     "id": 5,
-    "courseId": 3,
+    "courseId": "3",
     "studentId": "2",
     "qty": 5
   }

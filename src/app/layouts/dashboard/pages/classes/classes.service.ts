@@ -28,17 +28,18 @@ import { environment } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ClassesServices {
-
-  constructor (private http:HttpClient){
-
-  }
+  constructor(private http: HttpClient) {}
   getClass(): Observable<IClass[]> {
     // return of(CLASS_DB).pipe(delay(1500));
     return this.http.get<IClass[]>(
       environment.baseAPIURL + '/classes?_embed=student&_embed=course'
     );
   }
-
+  getClassesByStudentId(sId: string): Observable<IClass[]> {
+    return this.http.get<IClass[]>(
+      `${environment.baseAPIURL}/classes?studentId=${sId}&_embed=student&_embed=course`
+    );
+  }
   createClass(data: ICreateClassesData) {
     if (data.students && data.course && data.qty) {
       // const newClass: Partial<IClass> = {

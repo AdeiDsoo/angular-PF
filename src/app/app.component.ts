@@ -11,7 +11,7 @@ export class AppComponent {
   ENV=environment.isProd
   constructor(){
     if(!environment.isProd){
-      console.log(environment);
+      // console.log(environment);
       
     }
   }
