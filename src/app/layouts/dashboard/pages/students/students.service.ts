@@ -13,9 +13,13 @@ export class StudentService {
     );
   }
   createdStudent(payload: CreateStudentPayload): Observable<IStudent> {
+     const studentWithTimestamp: CreateStudentPayload = {
+       ...payload,
+       createdAt: new Date(),
+     };
     return this.httpClient.post<IStudent>(
       environment.baseAPIURL + '/students',
-      payload
+      studentWithTimestamp
     );
   }
   deleteStudentById(id: string): Observable<IStudent> {

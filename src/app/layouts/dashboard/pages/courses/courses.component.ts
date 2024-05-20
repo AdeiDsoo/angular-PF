@@ -53,9 +53,7 @@ export class CoursesComponent implements OnInit {
   }
 
   updateCourseById(id: string, data: ICourses): void {
-    this.store.dispatch(
-      CourseActions.updateCourseByID({ id, data })
-    );
+    this.store.dispatch(CourseActions.updateCourseByID({ id, data }));
   }
   openDialog(editingCourse?: ICourses): void {
     this.matDialog
@@ -66,13 +64,10 @@ export class CoursesComponent implements OnInit {
       .subscribe({
         next: (result) => {
           if (result) {
-           
             if (editingCourse) {
               this.updateCourseById(editingCourse.id, result);
             } else {
-              result.createdAt = new Date();
               this.createCourse(result);
-              // this.store.dispatch(CourseActions.loadCourses());
             }
           }
         },

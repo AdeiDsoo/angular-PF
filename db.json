@@ -25,11 +25,12 @@
       "createdAt": "2024-03-02T22:08:49.750Z"
     },
     {
-      "firstName": "asd",
-      "lastName": "sa",
-      "email": "as@mail.com",
+      "id": "7af9",
+      "firstName": "hola",
+      "lastName": "adios",
+      "email": "hola@mail.com",
       "role": "USER",
-      "id": "c5c1"
+      "createdAt": "2024-05-20T03:32:11.305Z"
     }
   ],
   "courses": [

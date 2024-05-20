@@ -77,7 +77,7 @@ export class StudentsComponent implements OnInit {
             if (editingStudent) {
               this.updateStudentById(editingStudent.id, result);
             } else {
-              result.createdAt = new Date();
+              // result.createdAt = new Date();
               this.createdStudent(result);
             }
           }
