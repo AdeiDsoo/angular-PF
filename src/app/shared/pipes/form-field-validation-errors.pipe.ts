@@ -9,7 +9,7 @@ export class FormFieldValidationErrorsPipe implements PipeTransform {
     value: ValidationErrors | undefined | null,
     ...args: unknown[]
   ): unknown {
-    console.log(value);
+    // console.log(value);
 
     if (value) {
       let messages: string[] = [];

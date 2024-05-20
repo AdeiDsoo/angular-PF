@@ -72,7 +72,9 @@ classes$:Observable<IClass[]>
   }
 
   loadCourses() {
-    this.courses = this.coursesService.getCourse();
+    this.coursesService.getCourse().subscribe({
+      next: (value)=> (this.courses=value)
+    });
   }
 
   loadClasses() {

@@ -1,11 +1,9 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesComponent } from './courses.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CoursesService } from './courses.service';
-import { CoursesMockService } from './courses-mock.service';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './store/course.effects';
@@ -30,7 +28,6 @@ export const COURSES = new InjectionToken('COURSES');
     CoursesService,
     {
       provide: CoursesService,
-      // useClass:CoursesMockService,
       useClass: CoursesService,
     },
     {

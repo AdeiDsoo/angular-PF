@@ -4,3 +4,9 @@ export interface ICourses{
     price:number,
     qty:number
 }
+
+export interface ICreateCoursePayload {
+  name: string;
+  price: number;
+  qty: number;
+}

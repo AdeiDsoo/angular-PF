@@ -5,9 +5,15 @@ export const selectClassState = createFeatureSelector<fromClass.State>(
   fromClass.classFeatureKey
 );
 
-export const selectClassList= createSelector(selectClassState, (c)=> c.classes)
+export const selectClassList = createSelector(
+  selectClassState,
+  (c) => c.classes
+);
 
-export const selectLoadingClasses= createSelector(selectClassState, (c)=> c.loadingClasses)
+export const selectLoadingClasses = createSelector(
+  selectClassState,
+  (c) => c.loadingClasses
+);
 
 export const selectClassesError = createSelector(
   selectClassState,

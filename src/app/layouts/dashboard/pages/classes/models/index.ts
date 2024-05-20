@@ -3,7 +3,7 @@ import { ICourses } from "../../courses/models";
 import { IStudent } from "../../students/models";
 
 export interface IClass{
-    id:number;
+    id:string;
     course?: ICourses,
     students?: IStudent, 
     studentId: string,

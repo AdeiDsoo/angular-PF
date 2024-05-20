@@ -1,10 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
 import { ICourses } from './models';
-import { API_URL, COURSES, RANDOM_NUMBER } from './courses.module';
-import { AlertsService } from '../../../../core/services/alerts.services';
+import { Store } from '@ngrx/store';
+import { CourseActions } from './store/course.actions';
+import {
+  selectCoursesList,
+  selectIsloading,
+  selectCoursesError,
+} from './store/course.selectors';
+import { Observable, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-courses',
@@ -13,26 +20,44 @@ import { CoursesDialogComponent } from './components/courses-dialog/courses-dial
 })
 export class CoursesComponent implements OnInit {
   displayedColumns = ['id', 'name', 'price', 'qty', 'actions'];
-
-  //courses: ICourses[] = [];
-
+  courses$: Observable<ICourses[]>;
+  isLoading$: Observable<boolean>;
+  error$: Observable<Error>;
+  courses: ICourses[] = [];
   constructor(
-    private matDialog: MatDialog,
     private coursesService: CoursesService,
-    @Inject(API_URL) private apiUrl: string,
-    @Inject(RANDOM_NUMBER) private random_Number: number,
-    @Inject(COURSES) public courses: ICourses[],
-    public alertService: AlertsService
+    private store: Store,
+    private matDialog: MatDialog
   ) {
-    this.alertService.notifier$.subscribe({
-      next: (message) => console.log(message),
-    });
+    this.isLoading$ = this.store.select(selectIsloading);
+    this.courses$ = this.store.select(selectCoursesList);
+    this.error$ = this.store
+      .select(selectCoursesError)
+      .pipe(map((err) => err as Error));
   }
   ngOnInit(): void {
-    this.courses = this.coursesService.getCourse();
+    this.store.dispatch(CourseActions.loadCourses());
+  }
+  createCourse(course: ICourses): void {
+    this.store.dispatch(CourseActions.createCourse({ payload: course }));
+  }
+  deleteCourseById(id: string): void {
+    Swal.fire({
+      icon: 'question',
+      html: 'Estas seguro?',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(CourseActions.deleteCourseByID({ id }));
+      }
+    });
+  }
+
+  updateCourseById(id: string, data: ICourses): void {
+    this.store.dispatch(
+      CourseActions.updateCourseByID({ id, data })
+    );
   }
   openDialog(editingCourse?: ICourses): void {
-
     this.matDialog
       .open(CoursesDialogComponent, {
         data: editingCourse,
@@ -40,29 +65,17 @@ export class CoursesComponent implements OnInit {
       .afterClosed()
       .subscribe({
         next: (result) => {
-
           if (result) {
+            // console.log(editingCourse,'edittinggg')
             if (editingCourse) {
-              this.courses = this.courses.map((course) =>
-                course.id === editingCourse.id
-                  ? { ...course, ...result }
-                  : course
-              );
+              this.updateCourseById(editingCourse.id, result);
             } else {
-              result.id = this.courses.length
-                ? this.courses[this.courses.length - 1].id + 1
-                : 1;
               result.createdAt = new Date();
-              this.courses = [...this.courses, result];
+              this.createCourse(result);
+              // this.store.dispatch(CourseActions.loadCourses());
             }
           }
         },
       });
-  }
-
-  onDeleteCourse(id: string): void {
-    if (confirm('Estas seguro de eliminar este curso?')) {
-      this.courses = this.courses.filter((c) => c.id != id);
-    }
   }
 }
