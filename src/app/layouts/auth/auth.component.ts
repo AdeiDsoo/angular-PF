@@ -37,7 +37,7 @@ export class AuthComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    // this.suscribeToAuthUserChange();
+
      this.authUserSubscription =
      this.store.select(authUser).subscribe({
       next: (student) => {
@@ -47,27 +47,15 @@ export class AuthComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void { 
-    // this.authStudentChangeSuscription?.unsubscribe();
     this.authUserSubscription?.unsubscribe
   }
 
-  // suscribeToAuthUserChange(): void {
-  //   this.authStudentChangeSuscription = this.authService.authStudent$.subscribe(
-  //     {
-  //       next: (authStudent) => {
-  //         if (authStudent !== null) {
-  //           this.router.navigate(['dashboard', 'home']);
-  //         }
-  //       },
-  //     }
-  //   );
-  // }
+
 
   login() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      // this.authService.login(this.loginForm.getRawValue());
       this.store.dispatch(
         authActions.login({ payload: this.loginForm.getRawValue() })
       );

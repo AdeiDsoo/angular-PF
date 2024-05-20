@@ -66,7 +66,7 @@ export class CoursesComponent implements OnInit {
       .subscribe({
         next: (result) => {
           if (result) {
-            // console.log(editingCourse,'edittinggg')
+           
             if (editingCourse) {
               this.updateCourseById(editingCourse.id, result);
             } else {

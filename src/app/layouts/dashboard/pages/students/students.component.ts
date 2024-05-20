@@ -4,6 +4,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { StudentDialogComponent } from './components/student-dialog/student-dialog.component';
 import { StudentService } from './students.service';
 import Swal from 'sweetalert2';
+import { Store } from '@ngrx/store';
+import { StudentActions } from './store/student.actions';
+import { Observable, map } from 'rxjs';
+import {
+  selectIsloading,
+  selectStudentError,
+  selectStudentList,
+} from './store/student.selectors';
 
 @Component({
   selector: 'app-students',
@@ -20,26 +28,41 @@ export class StudentsComponent implements OnInit {
     'actions',
   ];
 
-  loading = false;
-  students: IStudent[] = [];
+  // loading = false;
+  students$: Observable<IStudent[]>;
+  isLoading$: Observable<boolean>;
+  error$: Observable<Error>;
 
   constructor(
     private matDialog: MatDialog,
-    private studentService: StudentService
-  ) {}
+    private studentService: StudentService,
+    private store: Store
+  ) {
+    this.isLoading$ = this.store.select(selectIsloading);
+    this.students$ = this.store.select(selectStudentList);
+    this.error$ = this.store
+      .select(selectStudentError)
+      .pipe(map((err) => err as Error));
+  }
   ngOnInit(): void {
-    this.loading = true;
-    this.studentService.getStudents().subscribe({
-      next: (value) => {
-        this.students = value;
-      },
-      error: (err) => {
-        Swal.fire('Error', 'Ocurrrio un error', 'error');
-      },
-      complete: () => {
-        this.loading = false;
-      },
+    this.store.dispatch(StudentActions.loadStudents());
+  }
+  createdStudent(student: IStudent): void {
+    this.store.dispatch(StudentActions.createStudent({ payload: student }));
+  }
+  deleteStudentById(id: string): void {
+    Swal.fire({
+      icon: 'question',
+      html: 'Estas seguro?',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(StudentActions.deleteStudentByID({ id }));
+      }
     });
+  }
+
+  updateStudentById(id: string, data: IStudent): void {
+    this.store.dispatch(StudentActions.updateStudentByID({ id, data }));
   }
 
   openDialog(editingStudent?: IStudent): void {
@@ -52,41 +75,15 @@ export class StudentsComponent implements OnInit {
         next: (result) => {
           if (result) {
             if (editingStudent) {
-              this.students = this.students.map((student) =>
-                student.id === editingStudent.id
-                  ? { ...student, ...result }
-                  : student
-              );
+              this.updateStudentById(editingStudent.id, result);
             } else {
               result.createdAt = new Date();
-              this.studentService.createdStudent(result).subscribe({
-                next: (student) => {
-                  this.students = [...this.students, student];
-                },
-              });
-              // this.students = [...this.students, result];
+              this.createdStudent(result);
             }
           }
         },
       });
   }
 
-  onDeleteUser(id: string): void {
-    if (confirm('Estas seguro de eliminar este usuario?')) {
-      this.studentService.deletedStudent(id).subscribe({
-        next: (deletedStudent) => {
-          if (deletedStudent) {
-            this.students = this.students.filter(
-              (student) => student.id.toString() !== id
-            );
-          } else {
-            console.error('No se pudo eliminar el estudiante con ID:', id);
-          }
-        },
-        error: (err) => {
-          console.error('Error al eliminar estudiante:', err);
-        },
-      });
-    }
-  }
+  
 }

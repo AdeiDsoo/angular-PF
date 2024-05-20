@@ -14,19 +14,13 @@ export class DashboardComponent {
   showComponent = true;
   authStudent$: Observable<IStudent | null>;
 
-  constructor(private authService: AuthService, private router:Router) {
+  constructor(private authService: AuthService, private router: Router) {
     this.authStudent$ = this.authService.authStudent$;
   }
 
-  // login(): void {
-  //   this.authService.login();
-  // }
-
-  logout():void{
-  this.authService.logout()
-  //recibe un array y cada elemento del array se va sumando para conformar la url a la que buscars redireccionar
-  //ppor defecto reemplaza toda la url
-this.router.navigate(['auth'])
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['auth']);
   }
 
   isMobile(): boolean {
