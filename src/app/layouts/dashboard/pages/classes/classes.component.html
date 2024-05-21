@@ -26,6 +26,9 @@
   </mat-form-field>
   <button (click)="createClass()" mat-button>Crear Clase</button>
 </form>
+<div *ngIf="loadingClasses$ | async">
+  Cargando clases...
+</div>
 <table
   mat-table
   [dataSource]="(classes$ | async) || []"
@@ -55,21 +58,21 @@
       Actions
     </th>
     <td mat-cell *matCellDef="let element">
-      <!-- <button *ngIf="(authStudent$|async)?.role=== 'ADMIN'" (click)="openDialog(element)" mat-icon-button color="primary">
+      <button *ngIf="(authStudent$|async)?.role=== 'ADMIN'" (click)="openDialog(element)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
       <button *ngIf="(authStudent$|async)?.role=== 'ADMIN'"
-        (click)="deleteCourseById(element.id)"
+        (click)="deleteClassById(element.id)"
         mat-icon-button
         color="warn"
       >
         <mat-icon>delete</mat-icon>
-      </button> -->
+      </button> 
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
-<pre> {{ classesForm.value | json }} </pre>
-<pre>{{ classes$ | async | json }}</pre>
+<!-- <pre> {{ classesForm.value | json }} </pre> -->
+<!-- <pre>{{ classes$ | async | json }}</pre> -->
 }}

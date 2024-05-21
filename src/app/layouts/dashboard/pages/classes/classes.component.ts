@@ -15,6 +15,9 @@ import {
 import { ClassActions } from './store/class.actions';
 import { Observable, Subscription} from 'rxjs';
 import { AuthService } from '../../../../core/services/auth.services';
+import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { ClassDialogComponent } from './components/classes-dialog/classes-dialog.component';
 
 @Component({
   selector: 'app-classes',
@@ -50,13 +53,13 @@ export class ClassesComponent implements OnInit {
     private coursesService: CoursesService,
     private studentService: StudentService,
     private store: Store,
-    private authService: AuthService
+    private authService: AuthService,
+    private matDialog: MatDialog
   ) {
     this.loadingClasses$ = this.store.select(selectLoadingClasses);
     this.classes$ = this.store.select(selectClassList);
     this.error$ = this.store.select(selectClassesError);
     this.authStudent$ = this.authService.authStudent$;
-
   }
 
   ngOnInit(): void {
@@ -64,37 +67,46 @@ export class ClassesComponent implements OnInit {
     this.loadCourses();
     this.loadStudents();
   }
-  
-  createClass() {
-    this.classesServices.createClass(this.classesForm.getRawValue()).subscribe({
-      next: (value) => {
-         this.createClassRedox(value);
-      },
-    });
-  }
-
   createClassRedox(classes: IClass): void {
     this.store.dispatch(ClassActions.createClass({ payload: classes }));
   }
+  createClass() {
+    this.classesServices.createClass(this.classesForm.getRawValue()).subscribe({
+      next: (value) => {
+        this.createClassRedox(value);
+      },
+    });
+  }
+  deleteClassById(id: string): void {
+    Swal.fire({
+      icon: 'question',
+      html: 'Estas seguro?',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(ClassActions.deleteClassByID({ id }));
+      }
+    });
+  }
 
-  // createClass() {
-  //   const formValue = this.classesForm.getRawValue();
-  //   if (formValue.course && formValue.students) {
-  //     const structuredClass: IClass = {
-  //       id: '',
-  //       qty: formValue.qty || 0,
-  //       courseId: formValue.course.id,
-  //       studentId: formValue.students.id,
-  //     };
-  //     this.classesServices.createClass(structuredClass).subscribe({
-  //       next: (value) => {
-  //         this.createClassRedox(value);
-  //       },
-  //     });
-  //   } else {
-  //     console.error('Course or Students are missing in the form');
-  //   }
-  // }
+  updateClassesById(id: string, data: IClass): void {
+    this.store.dispatch(ClassActions.updateClass({ id, data }));
+  }
+
+  openDialog(editingClass?: IClass): void {
+    this.matDialog
+      .open(ClassDialogComponent, {
+        data: editingClass,
+      })
+
+      .afterClosed()
+      .subscribe({
+        next: (result) => {
+           if (editingClass) {
+            this.updateClassesById(editingClass.id, result);
+           }
+          },
+      });
+  }
 
   loadStudents() {
     this.studentService.getStudents().subscribe({

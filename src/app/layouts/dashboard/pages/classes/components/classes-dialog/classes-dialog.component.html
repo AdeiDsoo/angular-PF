@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Crear Usuario</h2>
+<div mat-dialog-content>
+  <form [formGroup]="classForm">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="w-100 p-2" appearance="fill">
+          <mat-label>IdCourse</mat-label>
+          <input formControlName="courseId" matInput />
+          <mat-hint>Campo requerido</mat-hint>
+          <mat-error>{{
+            courseIdControl?.errors | formFieldValidationErrors
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w-100 p-2" appearance="fill">
+          <mat-label>studentId</mat-label>
+          <input formControlName="studentId" matInput />
+           <mat-error>{{
+            studentIdControl?.errors | formFieldValidationErrors
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-8">
+        <mat-form-field class="w-100 p-2" appearance="fill">
+          <mat-label>qty</mat-label>
+          <input formControlName="qty" matInput />
+           <mat-error>{{
+            qtyControl?.errors | formFieldValidationErrors
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+     
+    </div>
+  </form>
+  <!-- {{userForm.value | json}} -->
+  <div class="d-flex justify-content-end" mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button (click)="onSave()" mat-button>Guardar</button>
+  </div>
+</div>

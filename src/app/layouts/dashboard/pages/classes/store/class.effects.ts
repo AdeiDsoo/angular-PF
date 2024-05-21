@@ -26,8 +26,32 @@ export class ClassEffects {
       concatMap((action) =>
         this.classesServices.createClass(action.payload).pipe(
           map((data) => ClassActions.createClassSuccess({ data })),
+          catchError((error) => of(ClassActions.createClassFailure({ error })))
+        )
+      )
+    );
+  });
+
+  deleteClassByID$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ClassActions.deleteClassByID),
+      concatMap((action) =>
+        this.classesServices.deleteClass(action.id).pipe(
+          map((data) => ClassActions.deleteClassSuccess({ data })),
+          catchError((error) => of(ClassActions.deleteClassFailure({ error })))
+        )
+      )
+    );
+  });
+
+  updateClassbyId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ClassActions.updateClass),
+      concatMap((action) =>
+        this.classesServices.updateClassById(action.id, action.data).pipe(
+          map((data) => ClassActions.updateClassSuccess({ data })),
           catchError((error) =>
-            of(ClassActions.createClassFailure({ error }))
+            of(ClassActions.updateClassFailure({ error }))
           )
         )
       )

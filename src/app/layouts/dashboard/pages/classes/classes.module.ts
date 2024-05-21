@@ -8,9 +8,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { ClassEffects } from './store/class.effects';
 import { StoreModule } from '@ngrx/store';
 import { classFeature } from './store/class.reducer';
+import { ClassDialogComponent } from './components/classes-dialog/classes-dialog.component';
 
 @NgModule({
-  declarations: [ClassesComponent],
+  declarations: [ClassesComponent, ClassDialogComponent],
   imports: [
     CommonModule,
     ClassesRoutingModule,
