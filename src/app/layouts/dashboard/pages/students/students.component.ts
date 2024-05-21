@@ -12,6 +12,7 @@ import {
   selectStudentError,
   selectStudentList,
 } from './store/student.selectors';
+import { AuthService } from '../../../../core/services/auth.services';
 
 @Component({
   selector: 'app-students',
@@ -28,21 +29,23 @@ export class StudentsComponent implements OnInit {
     'actions',
   ];
 
-  // loading = false;
   students$: Observable<IStudent[]>;
   isLoading$: Observable<boolean>;
   error$: Observable<Error>;
-
+  authStudent$: Observable<IStudent | null>;
+  
   constructor(
     private matDialog: MatDialog,
     private studentService: StudentService,
-    private store: Store
+    private store: Store,
+    private authService: AuthService
   ) {
     this.isLoading$ = this.store.select(selectIsloading);
     this.students$ = this.store.select(selectStudentList);
     this.error$ = this.store
       .select(selectStudentError)
       .pipe(map((err) => err as Error));
+    this.authStudent$ = this.authService.authStudent$;
   }
   ngOnInit(): void {
     this.store.dispatch(StudentActions.loadStudents());
@@ -77,13 +80,10 @@ export class StudentsComponent implements OnInit {
             if (editingStudent) {
               this.updateStudentById(editingStudent.id, result);
             } else {
-              // result.createdAt = new Date();
               this.createdStudent(result);
             }
           }
         },
       });
   }
-
-  
 }

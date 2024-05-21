@@ -42,10 +42,10 @@
       <button [routerLink]="element.id"  mat-icon-button color="primary">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button (click)="openDialog(element)" mat-icon-button color="primary">
+      <button *ngIf="(authStudent$|async)?.role=== 'ADMIN'" (click)="openDialog(element)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
-      <button (click)="deleteStudentById(element.id)" mat-icon-button color="warn">
+      <button *ngIf="(authStudent$|async)?.role=== 'ADMIN'"  (click)="deleteStudentById(element.id)" mat-icon-button color="warn">
         <mat-icon>delete</mat-icon>
       </button>
     </td>

@@ -34,6 +34,26 @@ export const reducer = createReducer(
       error: action.error,
       loadingClasses: false,
     };
+  }),
+  on(ClassActions.createClass, (state) => {
+    return {
+      ...state,
+      loadingClasses: false,
+    };
+  }),
+  on(ClassActions.createClassSuccess, (state, action) => {
+    return {
+      ...state,
+      classes: [...state.classes, action.data], // Agrega la nueva clase al estado existente
+      loadingClasses: false,
+    };
+  }),
+  on(ClassActions.createClassFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+      loadingClasses: true,
+    };
   })
 );
 

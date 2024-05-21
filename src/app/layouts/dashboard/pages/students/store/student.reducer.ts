@@ -76,7 +76,7 @@ export const reducer = createReducer(
       isLoading: false,
     };
   }),
-   on(StudentActions.updateStudentByID, (state) => ({
+  on(StudentActions.updateStudentByID, (state) => ({
     ...state,
     isLoading: true,
     error: null,
@@ -92,6 +92,20 @@ export const reducer = createReducer(
     ...state,
     isLoading: false,
     error,
+  })),
+  on(StudentActions.getStudentByID, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(StudentActions.getStudentByIDSuccess, (state, action) => ({
+    ...state,
+    selectedStudent: action.data,
+    isLoading: false,
+  })),
+  on(StudentActions.getStudentByIDFailure, (state, action) => ({
+    ...state,
+    error: action.error,
+    isLoading: false,
   }))
 );
 

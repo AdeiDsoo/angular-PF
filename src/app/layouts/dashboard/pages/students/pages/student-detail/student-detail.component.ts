@@ -12,9 +12,9 @@ import { IClass } from '../../../classes/models';
   styleUrl: './student-detail.component.scss',
 })
 export class StudentDetailComponent {
-  // student$: Observable<IStudent | undefined>;
+  student$: Observable<IStudent | undefined>;
   loading = false;
-  // classes$: Observable<IClass[]>;
+  classes$: Observable<IClass[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,15 +24,15 @@ export class StudentDetailComponent {
   ) {
     this.loading = true;
    
-  //   this.classes$ = this.classesService.getClassesByStudentId(
-  //     this.activatedRoute.snapshot.params['idStudent']
-  //   );
-  //   this.student$ = this.studentService
-  //     .getStudentById(this.activatedRoute.snapshot.params['idStudent'])
-  //     .pipe(
-  //       finalize(() => {
-  //         this.loading = false;
-  //       })
-  //     );
+    this.classes$ = this.classesService.getClassesByStudentId(
+      this.activatedRoute.snapshot.params['idStudent']
+    );
+    this.student$ = this.studentService
+      .getStudentById(this.activatedRoute.snapshot.params['idStudent'])
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      );
   }
 }

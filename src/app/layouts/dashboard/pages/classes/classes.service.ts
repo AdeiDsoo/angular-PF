@@ -28,29 +28,36 @@ import { environment } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ClassesServices {
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
   getClass(): Observable<IClass[]> {
     // return of(CLASS_DB).pipe(delay(1500));
-    return this.http.get<IClass[]>(
+    return this.httpClient.get<IClass[]>(
       environment.baseAPIURL + '/classes?_embed=student&_embed=course'
+      // environment.baseAPIURL + '/classes?_embed=course'
     );
   }
   getClassesByStudentId(sId: string): Observable<IClass[]> {
-    return this.http.get<IClass[]>(
+    return this.httpClient.get<IClass[]>(
       `${environment.baseAPIURL}/classes?studentId=${sId}&_embed=student&_embed=course`
     );
   }
-  createClass(data: ICreateClassesData) {
-    if (data.students && data.course && data.qty) {
-      // const newClass: Partial<IClass> = {
-      //   id: new Date().getTime(),
-      //   students: data.students,
-      //   course: data.course,
-      //   qty: data.qty,
-      // };
-      // [].push([newClass]);
-    }
-    return of([]);
+  // createClass(data: ICreateClassesData) {}
+  createClass(payload: ICreateClassesData): Observable<IClass> {
+       console.log('--------------> ', payload, '<------------------');
+        if (!payload.course || !payload.students) {
+          throw new Error('Course and Student must be provided');
+        }
+
+  let structureClass = {
+    qty: payload.qty,
+    courseId: payload.course.id, 
+    studentId: payload.students.id, 
+  };
+
+  return this.httpClient.post<IClass>(
+    environment.baseAPIURL + '/classes',
+    structureClass
+  );
   }
   deleteClass(id: number) {
     return of([]);

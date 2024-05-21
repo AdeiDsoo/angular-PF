@@ -33,22 +33,12 @@ export class StudentService {
       student
     );
   }
-  // getStudentById(id: string): Observable<IStudent | undefined> {
+  getStudentById(id: string): Observable<IStudent> {
 
-  //   return this.httpClient.get<IStudent>(
-  //     environment.baseAPIURL +'/students/' + id
-  //   );
-  // }
+    return this.httpClient.get<IStudent>(
+      environment.baseAPIURL +'/students/' + id
+    );
+  }
 
-  // createdStudent(payload:CreateStudentPayload ):Observable<IStudent>{
-  //   return this.httpClient.post<IStudent>(
-  //     environment.baseAPIURL + '/students/', { ...payload }
-  //   );
-  // }
 
-  // deletedStudent(id:string):Observable<IStudent|undefined >{
-  //   return this.httpClient.delete<IStudent>(
-  //     environment.baseAPIURL + '/students/' + id
-  //   );
-  // }
 }

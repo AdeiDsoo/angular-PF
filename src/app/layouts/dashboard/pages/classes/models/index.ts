@@ -7,7 +7,7 @@ export interface IClass{
     course?: ICourses,
     students?: IStudent, 
     studentId: string,
-    courseId: number,
+    courseId: string,
     qty: number
 }
 

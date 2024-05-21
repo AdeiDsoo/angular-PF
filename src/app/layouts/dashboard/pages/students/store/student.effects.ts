@@ -63,6 +63,21 @@ export class StudentEffects {
       )
     );
   });
+
+ getStudentById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StudentActions.getStudentByID),
+      concatMap((action) =>
+        this.studentService.getStudentById(action.id).pipe(
+          map((data) => StudentActions.getStudentByIDSuccess({ data })),
+          catchError((error) =>
+            of(StudentActions.getStudentByIDFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private studentService: StudentService

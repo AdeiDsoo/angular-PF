@@ -1,4 +1,30 @@
 {
+  "courses": [
+    {
+      "id": "23",
+      "name": "coursetest",
+      "price": 1200,
+      "qty": 5
+    },
+    {
+      "id": "63",
+      "name": "course mock 1",
+      "price": 9999,
+      "qty": 6
+    },
+    {
+      "name": "testing",
+      "price": "34",
+      "qty": "23",
+      "id": "c8e0"
+    },
+    {
+      "name": "test",
+      "price": "12",
+      "qty": "3456",
+      "id": "2ea9"
+    }
+  ],
   "students": [
     {
       "id": "1",
@@ -33,38 +59,72 @@
       "createdAt": "2024-05-20T03:32:11.305Z"
     }
   ],
-  "courses": [
-    {
-      "id": "23",
-      "name": "coursetest",
-      "price": 1200,
-      "qty": 5
-    },
-    {
-      "id": "63",
-      "name": "course mock 1",
-      "price": 9999,
-      "qty": 6
-    },
-    {
-      "name": "testing",
-      "price": "34",
-      "qty": "23",
-      "id": "c8e0"
-    },
-    {
-      "name": "test",
-      "price": "12",
-      "qty": "3456",
-      "id": "2ea9"
-    }
-  ],
   "classes": [
     {
-      "id": "5",
-      "courseId": "3",
-      "studentId": "2",
-      "qty": 5
+      "id": "133a",
+      "qty": 7,
+      "courseId": "c8e0",
+      "studentId": "1"
+    },
+    {
+      "id": "019a",
+      "qty": 89,
+      "courseId": "63",
+      "studentId": "7af9"
+    },
+    {
+      "id": "5153",
+      "qty": 9,
+      "courseId": "2ea9",
+      "studentId": "3"
+    },
+    {
+      "id": "3a31",
+      "qty": 3,
+      "courseId": "23",
+      "studentId": "1"
+    },
+    {
+      "id": "722f",
+      "qty": 2,
+      "courseId": "c8e0",
+      "studentId": "1"
+    },
+    {
+      "id": "7e58",
+      "qty": 1,
+      "courseId": "63",
+      "studentId": "1"
+    },
+    {
+      "id": "fdc4",
+      "qty": 1,
+      "courseId": "63",
+      "studentId": "1"
+    },
+    {
+      "id": "bdb0",
+      "qty": 5,
+      "courseId": "c8e0",
+      "studentId": "2"
+    },
+    {
+      "id": "7795",
+      "qty": 15,
+      "courseId": "c8e0",
+      "studentId": "1"
+    },
+    {
+      "id": "4b51",
+      "qty": 55,
+      "courseId": "c8e0",
+      "studentId": "3"
+    },
+    {
+      "id": "ae26",
+      "qty": 8,
+      "courseId": "c8e0",
+      "studentId": "2"
     }
   ]
 }

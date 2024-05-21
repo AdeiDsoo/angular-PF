@@ -10,15 +10,6 @@ const isAuth=authService.verifyToken()
 
 return isAuth || router.createUrlTree(['auth']);
 
-  // return authService.authStudent$.pipe(
-  //   map((authStudent) => {
-  //     if (!authStudent) {
-  //       return router.createUrlTree(['auth']);
-  //     }
-  //     return true;
-  //   })
-  // );
+
 };
 
-// return router.createUrlTree(['auth'])
-// return true;

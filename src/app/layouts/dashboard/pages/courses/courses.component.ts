@@ -12,6 +12,8 @@ import { Observable, map } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
 import Swal from 'sweetalert2';
+import { IStudent } from '../students/models';
+import { AuthService } from '../../../../core/services/auth.services';
 
 @Component({
   selector: 'app-courses',
@@ -24,16 +26,20 @@ export class CoursesComponent implements OnInit {
   isLoading$: Observable<boolean>;
   error$: Observable<Error>;
   courses: ICourses[] = [];
+  authStudent$: Observable<IStudent | null>;
+
   constructor(
     private coursesService: CoursesService,
     private store: Store,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private authService: AuthService
   ) {
     this.isLoading$ = this.store.select(selectIsloading);
     this.courses$ = this.store.select(selectCoursesList);
     this.error$ = this.store
       .select(selectCoursesError)
       .pipe(map((err) => err as Error));
+    this.authStudent$ = this.authService.authStudent$;
   }
   ngOnInit(): void {
     this.store.dispatch(CourseActions.loadCourses());

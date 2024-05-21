@@ -20,5 +20,9 @@ export const StudentActions = createActionGroup({
     'Update Student by ID': props<{ id: string; data: IStudent }>(),
     'Update Students Success': props<{ data: IStudent }>(),
     'Update Students Failure': props<{ error: HttpErrorResponse }>(),
+
+    'Get Student by ID': props<{ id: string; }>(),
+    'Get Student by ID Success': props<{ data: IStudent }>(),
+    'Get Student by ID Failure': props<{ error: HttpErrorResponse }>(),
   },
 });
