@@ -20,13 +20,19 @@ export class ClassEffects {
     );
   });
 
-  createCourses$ = createEffect(() => {
+  createClass$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ClassActions.createClass),
       concatMap((action) =>
         this.classesServices.createClass(action.payload).pipe(
-          map((data) => ClassActions.createClassSuccess({ data })),
-          catchError((error) => of(ClassActions.createClassFailure({ error })))
+          map((data) => {
+           
+            return ClassActions.createClassSuccess({ data });
+          }),
+          catchError((error) => {
+          
+            return of(ClassActions.createClassFailure({ error }));
+          })
         )
       )
     );
@@ -50,9 +56,7 @@ export class ClassEffects {
       concatMap((action) =>
         this.classesServices.updateClassById(action.id, action.data).pipe(
           map((data) => ClassActions.updateClassSuccess({ data })),
-          catchError((error) =>
-            of(ClassActions.updateClassFailure({ error }))
-          )
+          catchError((error) => of(ClassActions.updateClassFailure({ error })))
         )
       )
     );

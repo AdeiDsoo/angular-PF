@@ -37,10 +37,10 @@ export class ClassesComponent implements OnInit {
   students: IStudent[] = [];
   authStudent$: Observable<IStudent | null>;
 
-  classesForm = new FormGroup<IClassForm>({
+  classesForm = new FormGroup({
     qty: new FormControl(1, Validators.required),
-    course: new FormControl<ICourses | null>(null, Validators.required),
-    students: new FormControl<IStudent | null>(null, Validators.required),
+    courseId: new FormControl<string | null>(null, Validators.required),
+    studentId: new FormControl<string | null>(null, Validators.required),
   });
 
   classesSubscription?: Subscription;
@@ -67,16 +67,26 @@ export class ClassesComponent implements OnInit {
     this.loadCourses();
     this.loadStudents();
   }
-  createClassRedox(classes: IClass): void {
-    this.store.dispatch(ClassActions.createClass({ payload: classes }));
-  }
+
   createClass() {
-    this.classesServices.createClass(this.classesForm.getRawValue()).subscribe({
+    const formValue = this.classesForm.getRawValue();
+    const payload = {
+      qty: formValue.qty,
+      courseId: formValue.courseId,
+      studentId: formValue.studentId,
+    };
+
+    this.classesServices.createClass(payload).subscribe({
       next: (value) => {
-        this.createClassRedox(value);
+       
+        this.store.dispatch(ClassActions.createClass({ payload: value }));
+      },
+      error: (err) => {
+        console.error('Error creating class:', err);
       },
     });
   }
+
   deleteClassById(id: string): void {
     Swal.fire({
       icon: 'question',
@@ -97,14 +107,13 @@ export class ClassesComponent implements OnInit {
       .open(ClassDialogComponent, {
         data: editingClass,
       })
-
       .afterClosed()
       .subscribe({
         next: (result) => {
-           if (editingClass) {
+          if (editingClass) {
             this.updateClassesById(editingClass.id, result);
-           }
-          },
+          }
+        },
       });
   }
 

@@ -17,8 +17,15 @@ export interface IClassForm {
   course: FormControl<ICourses | null>;
 }
 
+// export interface ICreateClassesData {
+//   course?: ICourses | null;
+//   students?: IStudent | null;
+//   qty?: number | null;
+//   courseId?: string | null;
+//   studentId?: string | null;
+// }
 export interface ICreateClassesData {
-  course?: ICourses | null
-  students?: IStudent | null
-  qty?: number | null
+  courseId?: string | null;
+  studentId?: string | null;
+  qty?: number | null;
 }

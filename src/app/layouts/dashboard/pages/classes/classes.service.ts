@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { ICreateClassesData } from './models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
@@ -22,21 +22,14 @@ export class ClassesServices {
   }
 
   createClass(payload: ICreateClassesData): Observable<IClass> {
-    if (!payload.course || !payload.students) {
-      throw new Error('Course and Student must be provided');
-    }
-
-    let structureClass = {
-      qty: payload.qty,
-      courseId: payload.course.id,
-      studentId: payload.students.id,
-    };
-
+    console.log(payload, 'payload service');
+    
     return this.httpClient.post<IClass>(
       environment.baseAPIURL + '/classes',
-      structureClass
+      payload
     );
   }
+
   deleteClass(id: string): Observable<IClass> {
     return this.httpClient.delete<IClass>(
       environment.baseAPIURL + '/classes/' + id
@@ -49,11 +42,4 @@ export class ClassesServices {
       classes
     );
   }
-  // updateClass(id: number, data: IClass) {
-  //   return of(
-  //     [].map((item) => {
-  //       item.id === id ? { ...item, data } : item;
-  //     })
-  //   );
-  // }
 }

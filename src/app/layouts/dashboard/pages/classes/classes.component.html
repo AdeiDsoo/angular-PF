@@ -6,10 +6,10 @@
 <form [formGroup]="classesForm" action="">
   <mat-form-field>
     <mat-label>Courses</mat-label>
-    <mat-select formControlName="course">
-      <mat-option [value]="course" *ngFor="let course of courses">
-        {{ course.name }} - {{ course.price | currency }}
-      </mat-option>
+    <mat-select formControlName="courseId">
+     <mat-option *ngFor="let course of courses" [value]="course.id">
+      {{ course.name }} - {{ course.price | currency }}
+    </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
@@ -18,10 +18,10 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Alumnos</mat-label>
-    <mat-select formControlName="students">
-      <mat-option [value]="student" *ngFor="let student of students">
-        {{ student.firstName }} {{ student.lastName }}
-      </mat-option>
+    <mat-select formControlName="studentId">
+       <mat-option *ngFor="let student of students" [value]="student.id">
+      {{ student.firstName }} {{ student.lastName }}
+    </mat-option>
     </mat-select>
   </mat-form-field>
   <button (click)="createClass()" mat-button>Crear Clase</button>
@@ -74,5 +74,5 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 <!-- <pre> {{ classesForm.value | json }} </pre> -->
-<!-- <pre>{{ classes$ | async | json }}</pre> -->
+<pre>{{ classes$ | async | json }}</pre>
 }}
